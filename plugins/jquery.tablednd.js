@@ -370,14 +370,20 @@ jQuery.tableDnD = {
 			result += jQuery.tableDnD.serializeTable(this);
 		});
         return result;
-    }
-
+    },
+	destroy:function(){
+		// Unbind 'mousemove' and 'mouseup' events, which are bound in the 'build' function, from document.
+		jQuery(document)
+		.unbind('mousemove', jQuery.tableDnD.mousemove)
+		.unbind('mouseup', jQuery.tableDnD.mouseup);
+	}
 }
 
 jQuery.fn.extend(
 	{
 		tableDnD : jQuery.tableDnD.build,
 		tableDnDUpdate : jQuery.tableDnD.updateTables,
-		tableDnDSerialize: jQuery.tableDnD.serializeTables
+		tableDnDSerialize: jQuery.tableDnD.serializeTables,
+		unTableDnD : jQuery.tableDnD.destroy
 	}
 );
